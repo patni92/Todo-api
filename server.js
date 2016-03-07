@@ -23,6 +23,12 @@ app.get("/todos", function (req, res) {
         });
     }
 
+    if (queryParams.hasOwnProperty("q") && queryParams.q.trim().length > 0) {
+        filteredTodos = _.filter(filteredTodos, function (todo) {
+            return todo.description.indexOf(queryParams.q.toLowerCase()) > -1;
+        });
+    }
+
     res.json(filteredTodos);
 });
 
